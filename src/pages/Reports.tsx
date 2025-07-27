@@ -4,7 +4,6 @@
 
 import { useBudgetData } from '@/hooks/useBudgetData';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -32,7 +31,6 @@ import {
   BarChart3, 
   PieChart as PieChartIcon,
   TrendingUp,
-  Download,
   Calendar
 } from 'lucide-react';
 import { format, subDays, subMonths, parseISO } from 'date-fns';
@@ -181,12 +179,6 @@ export default function Reports() {
               <SelectItem value="1y">Last year</SelectItem> {/* full year */}
             </SelectContent>
           </Select>
-          
-          {/* export button (placeholder) */}
-          <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
-            Export
-          </Button>
         </div>
       </div>
 
@@ -354,10 +346,10 @@ export default function Reports() {
           <CardContent>
             {categoryData.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={categoryData.slice(0, 6)} layout="horizontal">
+                <BarChart data={categoryData.slice(0, 6)}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" tickFormatter={(value) => `$${value}`} />
-                  <YAxis dataKey="name" type="category" width={80} />
+                  <XAxis dataKey="name" />
+                  <YAxis tickFormatter={(value) => `$${value}`} />
                   <Tooltip formatter={(value) => formatCurrency(value as number)} />
                   <Bar dataKey="value" fill="#3b82f6" />
                 </BarChart>
